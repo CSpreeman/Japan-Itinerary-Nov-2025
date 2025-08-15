@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trip Itinerary — Nov 17 to Dec 5</title>
+    <meta name="description"
+        content="Trip itinerary: Los Angeles → Tokyo → J-Village (Fukushima) → Tokyo → Osaka → Tokyo → Los Angeles. Includes hotels and things to do." />
+    <style>
+        :root {
+            --bg: #283D3B;
+            --card: #197278;
+            --accent: #C44536;
+            --muted: #EDDDD4;
+            --glass: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.04);
+            --success: #34d399;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            background: #071028;
+            color: #e6eef6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            font-size: 16px;
+            line-height: 1.45;
+        }
+
+        .wrap {
+            width: min(1100px, 96%);
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+            border: 1px solid var(--card-border);
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            height: 64px;
+            width: 64px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #7c5cff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #10233f;
+            font-size: 20px;
+            box-shadow: 0 6px 18px rgba(124, 92, 255, 0.12);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 0.2px
+        }
+
+        p.lead {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        /* itinerary list */
+        .itinerary {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid var(--card-border);
+        }
+
+        .day {
+            display: flex;
+            gap: 5px;
+            padding: 8px;
+            border-radius: 10px;
+            align-items: flex-start;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            margin-bottom: 12px;
+            background: var(--glass);
+        }
+
+        .date {
+            min-width: 104px;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 13px;
+        }
+
+        .details {
+            flex: 1;
+        }
+
+        .details h3 {
+            margin: 0;
+            font-size: 15px
+        }
+
+        .details p {
+            margin: 2px 0;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .hotel {
+            margin-top: 8px
+        }
+
+        .hotel a {
+            color: #197278;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        /* sidebar */
+        aside {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid var(--card-border);
+            height: fit-content;
+            align-self: start
+        }
+
+        aside h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 16px
+        }
+
+        .place {
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.01);
+            margin-bottom: 10px
+        }
+
+        .place a {
+            color: #c6f3ff
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        /* responsive */
+        @media (max-width:960px) {
+            .wrap {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                order: 2
+            }
+        }
+
+        @media print {
+            .page-break {
+                page-break-before: always;
+                /* For older browsers */
+                break-before: page;
+                /* Modern spec */
+            }
+        }
+
+        /* little badge */
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 999px;
+            font-size: 12px;
+            color: var(--muted);
+            margin-right: 8px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div class="logo">Trip</div>
+            <div>
+                <h1>Japan — Trip Itinerary (Nov 17 → Dec 5)</h1>
+                <p class="lead">Los Angeles (LAX) → Tokyo → J-Village (Fukushima) → Tokyo → Osaka → Tokyo → Los Angeles
+                    (HND → LAX). Hotels and highlights included.</p>
+            </div>
+        </header>
+
+        <main class="itinerary" role="main" aria-labelledby="it-title">
+            <h2 id="it-title" style="margin-top:0;margin-bottom:12px">Daily schedule</h2>
+
+            <article class="day">
+                <div class="date">Mon, Nov 17</div>
+                <div class="details">
+                    <h3>Depart Los Angeles (LAX) for Tokyo</h3>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Tue, Nov 18</div>
+                <div class="details">
+                    <h3>Arrive Tokyo — Haneda (HND) 9:10 PM</h3>
+                    <p>Overnight in Tokyo.</p>
+                    <div class="hotel">Hotel: <span class="badge"><a href="" target="_blank"
+                                rel="noopener">TBD</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Wed, Nov 19</div>
+                <div class="details">
+                    <h3>Morning in Tokyo → Travel to J-Village Area, Fukushima Prefecture</h3>
+                    <p>Emily's soccer games for the Deaflympics begin.</p>
+                    <div class="hotel">Hotel: <span class="badge"><a href="https://grandpark-px.jp/en/iwaki/"
+                                target="_blank" rel="noopener">Grand Park Hotel Panex Iwaki</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Thu, Nov 20</div>
+                <div class="details">
+                    <h3>J-Village Area — Emily's games</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="https://grandpark-px.jp/en/iwaki/"
+                                target="_blank" rel="noopener">Grand Park Hotel Panex Iwaki</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Fri, Nov 21</div>
+                <div class="details">
+                    <h3>J-Village Area — Emily's games</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="https://grandpark-px.jp/en/iwaki/"
+                                target="_blank" rel="noopener">Grand Park Hotel Panex Iwaki</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Sat, Nov 22</div>
+                <div class="details">
+                    <h3>J-Village Area — Emily's games</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="https://grandpark-px.jp/en/iwaki/"
+                                target="_blank" rel="noopener">Grand Park Hotel Panex Iwaki</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Sun, Nov 23</div>
+                <div class="details">
+                    <h3>J-Village Area — Emily's games</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="https://grandpark-px.jp/en/iwaki/"
+                                target="_blank" rel="noopener">Grand Park Hotel Panex Iwaki</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Mon, Nov 24</div>
+                <div class="details">
+                    <h3>J-Village Area — Emily's games</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="https://grandpark-px.jp/en/iwaki/"
+                                target="_blank" rel="noopener">Grand Park Hotel Panex Iwaki</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Tue, Nov 25</div>
+                <div class="details">
+                    <h3>J-Village Area — Emily's games</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="https://grandpark-px.jp/en/iwaki/"
+                                target="_blank" rel="noopener">Grand Park Hotel Panex Iwaki</a></span></div>
+                </div>
+            </article>
+            <article class="day">
+                <div class="date">Wed, Nov 26</div>
+                <div class="details">
+                    <h3>Check out — Morning in Fukushima → Depart for Tokyo</h3>
+                    <p>Spend the day and night in Tokyo to break up travel.</p>
+                    <div class="hotel">Hotel: <span class="badge"><a href="" target="_blank"
+                                rel="noopener">TBD</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Thu, Nov 27</div>
+                <div class="details">
+                    <h3>Morning: Depart Tokyo for Osaka — Arrive in Osaka</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a
+                                href="https://www.marriott.com/en-us/hotels/osaow-w-osaka/overview/" target="_blank"
+                                rel="noopener">W Hotel Osaka</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Fri, Nov 28</div>
+                <div class="details">
+                    <h3>Osaka</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a
+                                href="https://www.marriott.com/en-us/hotels/osaow-w-osaka/overview/" target="_blank"
+                                rel="noopener">W Hotel Osaka</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Sat, Nov 29</div>
+                <div class="details">
+                    <h3>Osaka</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a
+                                href="https://www.marriott.com/en-us/hotels/osaow-w-osaka/overview/" target="_blank"
+                                rel="noopener">W Hotel Osaka</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Sun, Nov 30</div>
+                <div class="details">
+                    <h3>Osaka</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a
+                                href="https://www.marriott.com/en-us/hotels/osaow-w-osaka/overview/" target="_blank"
+                                rel="noopener">W Hotel Osaka</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Mon, Dec 1</div>
+                <div class="details">
+                    <h3>Osaka</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a
+                                href="https://www.marriott.com/en-us/hotels/osaow-w-osaka/overview/" target="_blank"
+                                rel="noopener">W Hotel Osaka</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Tue, Dec 2</div>
+                <div class="details">
+                    <h3>Depart Osaka for Tokyo (Final stay)</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="" target="_blank"
+                                rel="noopener">TBD</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Wed, Dec 3</div>
+                <div class="details">
+                    <h3>Tokyo — Final stay</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="" target="_blank"
+                                rel="noopener">TBD</a></span></div>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Thu, Dec 4</div>
+                <div class="details">
+                    <h3>Tokyo — Late evening departure</h3>
+                    <p>Depart Tokyo (HND) just after midnight for Los Angeles (LAX).</p>
+                </div>
+            </article>
+
+            <article class="day">
+                <div class="date">Fri, Dec 5</div>
+                <div class="details">
+                    <h3>Arrive Los Angeles (LAX)</h3>
+                    <p>Flight departs Tokyo at 12:50 AM Fri (local). Arrive back in Los Angeles due to time difference.
+                    </p>
+                </div>
+            </article>
+
+        </main>
+
+        <aside aria-labelledby="side-title">
+            <h2 id="side-title">Day trips</h2>
+            <div class="place">
+                <h3 style="margin:0 0 6px 0">J-Village/Iwaki</h3>
+                <p style="margin:0;color:var(--muted)">Day trip to Sendai</p>
+                <p style="margin:0;color:var(--muted)">Day trip to Kitakata</p>
+                <p style="margin:0;color:var(--muted)">Ideas?</p>
+                <h3 style="margin:0 0 6px 0">Osaka</h3>
+                <p style="margin:0;color:var(--muted)">Day trip to Kyoto</p>
+                <p style="margin:0;color:var(--muted)">Day trip to Nara</p>
+                <p style="margin:0;color:var(--muted)">Day trip to Kobe</p>
+            </div>
+
+            <h2 id="side-title">Things to do</h2>
+            <div class="place">
+                <h3 style="margin:0 0 6px 0">J-Village/Iwaki</h3>
+                <p style="margin:0;color:var(--muted)">TBD — add places, restaurants, or transit notes here.</p>
+            </div>
+            <div class="place">
+                <h3 style="margin:0 0 6px 0">Osaka</h3>
+                <p style="margin:0 0 8px 0;color:var(--muted)">Suggested highlight:</p>
+                <p style="margin:0"><a href="https://www.teamlab.art/e/botanicalgarden/" target="_blank"
+                        rel="noopener">teamLab Botanical Garden (Osaka)</a></p>
+            </div>
+            <div class="place">
+                <h3 style="margin:0 0 6px 0">Kyoto</h3>
+                <p style="margin:0;color:var(--muted)">TBD — add places, restaurants, or transit notes here.</p>
+            </div>
+            <div class="place">
+                <h3 style="margin:0 0 6px 0">Tokyo</h3>
+                <p style="margin:0;color:var(--muted)">TBD — add places, restaurants, or transit notes here.</p>
+            </div>
+
+            <div style="margin-top:12px;color:var(--muted);font-size:13px">
+                <strong>Notes</strong>
+                <ul style="padding-left:18px;margin:8px 0 0 0;color:var(--muted)">
+                    <li>Times are local — double-check flight times and terminals.</li>
+                    <li>Consider local transit passes (Suica/Pasmo in Tokyo; JR passes if applicable).</li>
+                    <li>For games at J-Village, leave time for travel between hotels and venues.</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</body>
+
+</html>
