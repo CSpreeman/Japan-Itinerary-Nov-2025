@@ -267,6 +267,40 @@
         .notes-body[hidden] {
             display: none;
         }
+
+        /* schedule table styling */
+        .schedule-wrap {
+            overflow-x: auto;
+            margin-top: 6px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .schedule-table thead th {
+            color: #eaf6ff;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .schedule-table caption {
+            caption-side: top;
+            text-align: left;
+            color: #cfeff6;
+            font-weight: 700;
+            padding-bottom: 6px;
+        }
     </style>
 </head>
 
@@ -281,10 +315,11 @@
             </div>
         </header>
 
-        <!-- HTML5 tabs inserted under the header -->
         <div class="tabs" role="tablist" aria-label="Primary tabs">
             <button class="tab" role="tab" id="tab-itinerary" aria-controls="panel-itinerary"
                 aria-selected="true">Itinerary</button>
+            <button class="tab" role="tab" id="tab-games" aria-controls="panel-games" aria-selected="false">Game
+                schedule</button>
             <button class="tab" role="tab" id="tab-daytrips" aria-controls="panel-daytrips" aria-selected="false">Day
                 Trips</button>
         </div>
@@ -485,6 +520,32 @@
 
         </main>
 
+        <!-- Game schedule panel (women's football) -->
+        <section id="panel-games" role="region" aria-labelledby="games-title" hidden>
+            <h2 id="games-title" style="margin-top:0;margin-bottom:8px">Game schedule — Football (Women)</h2>
+            <div class="schedule-wrap">
+                <table class="schedule-table" summary="Women football schedule">
+                    <caption>Women's Football — Deaflympics Tokyo 2025 (extracted)</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Match</th>
+                            <th scope="col">Venue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nov 19</td>
+                            <td>10:00</td>
+                            <td>Place holder</td>
+                            <td>J-Village Stadium</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <aside aria-labelledby="side-title" id="panel-daytrips" hidden>
             <h2 id="side-title">Day trips</h2>
             <div class="place">
@@ -542,6 +603,7 @@
             const tabs = Array.from(document.querySelectorAll('.tab'));
             const main = document.getElementById('panel-itinerary');
             const aside = document.getElementById('panel-daytrips');
+            const games = document.getElementById('panel-games');
 
             function clearSpans() {
                 if (main) main.classList.remove('span-full');
@@ -549,8 +611,8 @@
             }
 
             function show(id) {
-                // hide main and aside
-                [main, aside].forEach(p => p && p.setAttribute('hidden', ''));
+                // hide all panels first
+                [main, aside, games].forEach(p => p && p.setAttribute('hidden', ''));
 
                 if (id === 'panel-daytrips') {
                     // show aside as its own panel, hide main
@@ -559,6 +621,12 @@
                 } else if (id === 'panel-itinerary') {
                     // show main as full width, hide aside
                     if (main) { main.removeAttribute('hidden'); main.classList.add('span-full'); }
+                    if (aside) aside.setAttribute('hidden', '');
+                    if (games) games.setAttribute('hidden', '');
+                } else if (id === 'panel-games') {
+                    // show games as full width (main area replacement)
+                    if (games) { games.removeAttribute('hidden'); games.classList.add('span-full'); }
+                    if (main) main.setAttribute('hidden', '');
                     if (aside) aside.setAttribute('hidden', '');
                 }
 
