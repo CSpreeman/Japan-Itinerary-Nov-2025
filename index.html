@@ -312,6 +312,18 @@
             font-size: 13px
         }
 
+        .schedule-controls .badge-type {
+            white-space: nowrap
+        }
+
+        /* slightly larger checkbox and wrap badges when needed */
+        input[type="checkbox"] {
+            -ms-transform: scale(1.1);
+            /* IE */
+            transform: scale(1.05);
+            margin: 0;
+        }
+
         .badge-type {
             padding: 4px 8px;
             border-radius: 999px;
@@ -339,6 +351,77 @@
 
         .schedule-table.hide-practices tr[data-type="practice"] {
             display: none
+        }
+
+        /* Mobile-friendly schedule: stack rows into cards */
+        @media (max-width:640px) {
+            .schedule-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .schedule-wrap {
+                margin-top: 8px;
+                padding: 4px 2px;
+            }
+
+            .schedule-table {
+                border: 0;
+                font-size: 14px;
+            }
+
+            .schedule-table thead {
+                display: none;
+                /* hide header on small screens */
+            }
+
+            .schedule-table tbody tr {
+                display: block;
+                margin: 0 0 12px 0;
+                background: rgba(255, 255, 255, 0.02);
+                border-radius: 10px;
+                padding: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.03);
+                transition: transform 120ms ease, box-shadow 120ms ease;
+            }
+
+            .schedule-table tbody tr td {
+                display: flex;
+                width: 100%;
+                padding: 6px 0;
+                border: none;
+            }
+
+            .schedule-table tbody tr:focus-within,
+            .schedule-table tbody tr:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 20px rgba(2, 6, 23, 0.35);
+            }
+
+            .schedule-table tbody tr td::before {
+                /* label for each cell */
+                content: attr(data-label);
+                min-width: 80px;
+                color: var(--muted);
+                font-weight: 700;
+                margin-right: 8px;
+                flex-shrink: 0;
+                font-size: 13px;
+            }
+
+            .schedule-table tbody tr td:last-child {
+                padding-bottom: 0;
+            }
+
+            .badge-type {
+                font-size: 13px;
+                padding: 6px 10px;
+            }
+
+            .badge {
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -566,8 +649,11 @@
                 <div class="schedule-controls">
                     <div>
                         <strong>Show:</strong>
-                        <label style="margin-left:8px"><input type="checkbox" id="show-practices" checked>
-                            Practices</label>
+                        <label for="show-practices"
+                            style="margin-left:8px; display:inline-flex; align-items:center; gap:8px;">
+                            <input type="checkbox" id="show-practices" checked style="width:18px;height:18px;">
+                            <span>Practices</span>
+                        </label>
                     </div>
                     <div style="margin-left:6px">
                         <span class="badge-type badge-game">Game</span>
@@ -588,256 +674,256 @@
                     </thead>
                     <tbody>
                         <tr data-type="practice">
-                            <td>12 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>United States</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">12 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">United States</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>13 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>United States</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">13 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">United States</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="meeting">
-                            <td>13 Nov 2025</td>
-                            <td>17:00</td>
-                            <td><span class="badge-type badge-meeting">Meeting</span></td>
-                            <td>Technical Meeting</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">13 Nov 2025</td>
+                            <td data-label="Time">17:00</td>
+                            <td data-label="Type"><span class="badge-type badge-meeting">Meeting</span></td>
+                            <td data-label="Match">Technical Meeting</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>14 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>United States</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">14 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">United States</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>15 Nov 2025</td>
-                            <td>12:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>USA vs GBR</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">15 Nov 2025</td>
+                            <td data-label="Time">12:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">USA vs GBR</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>16 Nov 2025</td>
-                            <td>14:00</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>United States</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">16 Nov 2025</td>
+                            <td data-label="Time">14:00</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">United States</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>17 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>United States</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">17 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">United States</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>17 Nov 2025</td>
-                            <td>12:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>USA vs AUS</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">17 Nov 2025</td>
+                            <td data-label="Time">12:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">USA vs AUS</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>18 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>United States</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">18 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">United States</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>19 Nov 2025</td>
-                            <td>12:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>USA vs AUS</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">19 Nov 2025</td>
+                            <td data-label="Time">12:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">USA vs AUS</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>20 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Quarterfinal 2A</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">20 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Quarterfinal 2A</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>20 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Quarterfinal 2B</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">20 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Quarterfinal 2B</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>20 Nov 2025</td>
-                            <td>10:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Quarterfinal 3A</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">20 Nov 2025</td>
+                            <td data-label="Time">10:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Quarterfinal 3A</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>20 Nov 2025</td>
-                            <td>10:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Quarterfinal 3B</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">20 Nov 2025</td>
+                            <td data-label="Time">10:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Quarterfinal 3B</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>20 Nov 2025</td>
-                            <td>14:00</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Semifinal 1B</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">20 Nov 2025</td>
+                            <td data-label="Time">14:00</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Semifinal 1B</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>20 Nov 2025</td>
-                            <td>14:00</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Semifinal 1A</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">20 Nov 2025</td>
+                            <td data-label="Time">14:00</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Semifinal 1A</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>21 Nov 2025</td>
-                            <td>12:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>Quarterfinals - 2A vs 3B</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">21 Nov 2025</td>
+                            <td data-label="Time">12:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">Quarterfinals - 2A vs 3B</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>21 Nov 2025</td>
-                            <td>14:00</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>1B</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">21 Nov 2025</td>
+                            <td data-label="Time">14:00</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">1B</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>21 Nov 2025</td>
-                            <td>14:00</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>1A</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">21 Nov 2025</td>
+                            <td data-label="Time">14:00</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">1A</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>21 Nov 2025</td>
-                            <td>16:30</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>Quarterfinals - 2B vs 3A</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">21 Nov 2025</td>
+                            <td data-label="Time">16:30</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">Quarterfinals - 2B vs 3A</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>22 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>LW7</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">22 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">LW7</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>22 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>LW8</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">22 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">LW8</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>22 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>WW7</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">22 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">WW7</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>22 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>WW8</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">22 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">WW8</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>22 Nov 2025</td>
-                            <td>10:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Semifinal 1A</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">22 Nov 2025</td>
+                            <td data-label="Time">10:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Semifinal 1A</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>22 Nov 2025</td>
-                            <td>10:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>Semifinal 1B</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">22 Nov 2025</td>
+                            <td data-label="Time">10:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">Semifinal 1B</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>23 Nov 2025</td>
-                            <td>12:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>Place 5-6 - LW7 vs LW8</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">23 Nov 2025</td>
+                            <td data-label="Time">12:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">Place 5-6 - LW7 vs LW8</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>23 Nov 2025</td>
-                            <td>12:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>Semifinals - 1A vs W8</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">23 Nov 2025</td>
+                            <td data-label="Time">12:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">Semifinals - 1A vs W8</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>23 Nov 2025</td>
-                            <td>16:30</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>Semifinals - 1B vs W7</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">23 Nov 2025</td>
+                            <td data-label="Time">16:30</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">Semifinals - 1B vs W7</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="meeting">
-                            <td>23 Nov 2025</td>
-                            <td>19:00</td>
-                            <td><span class="badge-type badge-meeting">Meeting</span></td>
-                            <td>Technical Meeting</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">23 Nov 2025</td>
+                            <td data-label="Time">19:00</td>
+                            <td data-label="Type"><span class="badge-type badge-meeting">Meeting</span></td>
+                            <td data-label="Match">Technical Meeting</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>24 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>LW10</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">24 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">LW10</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>24 Nov 2025</td>
-                            <td>08:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>LW11</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">24 Nov 2025</td>
+                            <td data-label="Time">08:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">LW11</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>24 Nov 2025</td>
-                            <td>10:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>WW10</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">24 Nov 2025</td>
+                            <td data-label="Time">10:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">WW10</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="practice">
-                            <td>24 Nov 2025</td>
-                            <td>10:30</td>
-                            <td><span class="badge-type badge-practice">Practice</span></td>
-                            <td>WW11</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">24 Nov 2025</td>
+                            <td data-label="Time">10:30</td>
+                            <td data-label="Type"><span class="badge-type badge-practice">Practice</span></td>
+                            <td data-label="Match">WW11</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>25 Nov 2025</td>
-                            <td>10:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>Bronze Medal Game - L10 vs L11</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">25 Nov 2025</td>
+                            <td data-label="Time">10:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">Bronze Medal Game - L10 vs L11</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                         <tr data-type="game">
-                            <td>25 Nov 2025</td>
-                            <td>12:00</td>
-                            <td><span class="badge-type badge-game">Game</span></td>
-                            <td>Gold Medal Game - W10 vs W11</td>
-                            <td>J-Village</td>
+                            <td data-label="Date">25 Nov 2025</td>
+                            <td data-label="Time">12:00</td>
+                            <td data-label="Type"><span class="badge-type badge-game">Game</span></td>
+                            <td data-label="Match">Gold Medal Game - W10 vs W11</td>
+                            <td data-label="Venue">J-Village</td>
                         </tr>
                     </tbody>
                 </table>
@@ -994,6 +1080,9 @@
         (function () {
             const rows = Array.from(document.querySelectorAll('.schedule-table tbody tr'));
             if (!rows.length) return;
+
+            // make rows keyboard-focusable for better accessibility on mobile/keyboard
+            rows.forEach(r => { r.setAttribute('tabindex', '0'); r.setAttribute('role', 'group'); });
 
             function parseDateCell(text) {
                 // Expect formats like '12 Nov 2025' — convert to ISO-ish for Date
