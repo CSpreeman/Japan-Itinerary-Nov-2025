@@ -201,6 +201,72 @@
             color: var(--muted);
             margin-right: 8px
         }
+
+        /* Simple HTML5 tabs styling (segmented control) */
+        .tabs {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 6px;
+            margin: 14px 0 12px 0;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .tab {
+            flex: 1 1 0;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .tab[aria-selected="true"] {
+            background: linear-gradient(90deg, var(--accent), #7c5cff);
+            color: #061523;
+            box-shadow: 0 6px 18px rgba(124, 92, 255, 0.10);
+        }
+
+        .tab:focus-visible {
+            outline: 3px solid rgba(124, 92, 255, 0.14);
+            outline-offset: 2px;
+        }
+
+        /* allow main to span both columns when needed */
+        .span-full {
+            grid-column: 1 / -1;
+        }
+
+        /* Collapsible notes */
+        .collapse-toggle {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 6px 8px;
+            font-size: 14px;
+        }
+
+        .collapse-toggle .chev {
+            display: inline-block;
+            margin-left: 8px;
+            transition: transform 180ms ease;
+        }
+
+        .collapse-toggle[aria-expanded="false"] .chev {
+            transform: rotate(-90deg);
+        }
+
+        .notes-body[hidden] {
+            display: none;
+        }
     </style>
 </head>
 
@@ -215,8 +281,28 @@
             </div>
         </header>
 
-        <main class="itinerary" role="main" aria-labelledby="it-title">
+        <!-- HTML5 tabs inserted under the header -->
+        <div class="tabs" role="tablist" aria-label="Primary tabs">
+            <button class="tab" role="tab" id="tab-itinerary" aria-controls="panel-itinerary"
+                aria-selected="true">Itinerary</button>
+            <button class="tab" role="tab" id="tab-daytrips" aria-controls="panel-daytrips" aria-selected="false">Day
+                Trips</button>
+        </div>
+
+        <main class="itinerary" role="main" aria-labelledby="it-title" id="panel-itinerary">
             <h2 id="it-title" style="margin-top:0;margin-bottom:12px">Daily schedule</h2>
+
+            <div class="place notes" style="margin-bottom:14px">
+                <div class="notes-header">
+                    <button class="collapse-toggle" aria-expanded="true" aria-controls="notes-body">Notes &amp; Packing
+                        <span class="chev">▾</span></button>
+                </div>
+                <div id="notes-body" class="notes-body">
+                    <p style="margin:0;color:var(--muted)">- Check passport validity and visa requirements.</p>
+                    <p style="margin:0;color:var(--muted)">- Pack layers for November weather.</p>
+                    <p style="margin:0;color:var(--muted)">- Consider portable Wi‑Fi or local SIM.</p>
+                </div>
+            </div>
 
             <article class="day">
                 <div class="date">Mon, Nov 17</div>
@@ -382,6 +468,8 @@
                 <div class="date">Thu, Dec 4</div>
                 <div class="details">
                     <h3>Tokyo — Late evening departure</h3>
+                    <div class="hotel">Hotel: <span class="badge"><a href="" target="_blank"
+                                rel="noopener">TBD</a></span></div>
                     <p>Depart Tokyo (HND) just after midnight for Los Angeles (LAX).</p>
                 </div>
             </article>
@@ -397,7 +485,7 @@
 
         </main>
 
-        <aside aria-labelledby="side-title">
+        <aside aria-labelledby="side-title" id="panel-daytrips" hidden>
             <h2 id="side-title">Day trips</h2>
             <div class="place">
                 <h3 style="margin:0 0 6px 0">J-Village/Iwaki</h3>
@@ -447,6 +535,75 @@
             </div>
         </aside>
     </div>
+
+    <script>
+        // accessible tabs behavior with grid spanning (fixed)
+        (function () {
+            const tabs = Array.from(document.querySelectorAll('.tab'));
+            const main = document.getElementById('panel-itinerary');
+            const aside = document.getElementById('panel-daytrips');
+
+            function clearSpans() {
+                if (main) main.classList.remove('span-full');
+                if (aside) aside.classList.remove('span-full');
+            }
+
+            function show(id) {
+                // hide main and aside
+                [main, aside].forEach(p => p && p.setAttribute('hidden', ''));
+
+                if (id === 'panel-daytrips') {
+                    // show aside as its own panel, hide main
+                    if (aside) { aside.removeAttribute('hidden'); aside.classList.add('span-full'); }
+                    if (main) main.setAttribute('hidden', '');
+                } else if (id === 'panel-itinerary') {
+                    // show main as full width, hide aside
+                    if (main) { main.removeAttribute('hidden'); main.classList.add('span-full'); }
+                    if (aside) aside.setAttribute('hidden', '');
+                }
+
+                // update aria-selected
+                tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('aria-controls') === id ? 'true' : 'false'));
+            }
+
+            tabs.forEach((t, i) => {
+                t.addEventListener('click', () => show(t.getAttribute('aria-controls')));
+                t.addEventListener('keydown', e => {
+                    if (e.key === 'ArrowRight') { tabs[(i + 1) % tabs.length].focus(); e.preventDefault(); }
+                    if (e.key === 'ArrowLeft') { tabs[(i - 1 + tabs.length) % tabs.length].focus(); e.preventDefault(); }
+                    if (e.key === 'Enter' || e.key === ' ') { show(t.getAttribute('aria-controls')); e.preventDefault(); }
+                });
+            });
+
+            // initial state
+            const initial = tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0];
+            if (initial) show(initial.getAttribute('aria-controls'));
+        })();
+
+        // Notes collapse behavior
+        (function () {
+            const toggle = document.querySelector('.collapse-toggle');
+            const body = document.getElementById('notes-body');
+            if (!toggle || !body) return;
+
+            function setState(expanded) {
+                toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                if (!expanded) body.setAttribute('hidden', ''); else body.removeAttribute('hidden');
+                try { sessionStorage.setItem('notesExpanded', expanded ? '1' : '0'); } catch (e) { }
+            }
+
+            toggle.addEventListener('click', () => {
+                const expanded = toggle.getAttribute('aria-expanded') === 'true';
+                setState(!expanded);
+            });
+
+            // restore from sessionStorage
+            try {
+                const saved = sessionStorage.getItem('notesExpanded');
+                setState(saved !== '0');
+            } catch (e) { setState(true); }
+        })();
+    </script>
 </body>
 
 </html>
