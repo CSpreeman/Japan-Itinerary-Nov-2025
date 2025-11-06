@@ -86,6 +86,34 @@
             font-size: 13px
         }
 
+        /* header links: small inline link group used in the header */
+        header .header-links {
+            margin-top: 8px;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        header .header-links a {
+            color: #c6f3ff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            font-weight: 600;
+        }
+
+        header .header-links a:focus,
+        header .header-links a:hover {
+            text-decoration: none;
+            box-shadow: 0 6px 14px rgba(2, 6, 23, 0.35);
+            transform: translateY(-1px);
+        }
+
         /* itinerary list */
         .itinerary {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
@@ -433,7 +461,14 @@
             <div>
                 <h1>Japan - Trip Itinerary (Nov 17 → Dec 5)</h1>
                 <p class="lead">Los Angeles (LAX) → Tokyo → J-Village (Fukushima) → Tokyo → Osaka → Tokyo → Los Angeles
-                    (HND → LAX). Hotels and highlights included.</p>
+                    (HND → LAX)
+                </p>
+                <div class="header-links">
+                    <a href="https://deaflympics2025-games.jp/" target="_blank" rel="noopener">Deaflympics 2025 Main
+                        Site</a>
+                    <a href="https://www.youtube.com/@TOKYO2025DEAFLYMPICS" target="_blank" rel="noopener">Deaflympics
+                        Youtube (Streams should be here!)</a>
+                </div>
             </div>
         </header>
 
@@ -455,9 +490,9 @@
                         <span class="chev">▾</span></button>
                 </div>
                 <div id="notes-body" class="notes-body">
-                    <p style="margin:0;color:var(--muted)">- Check passport validity and visa requirements.</p>
-                    <p style="margin:0;color:var(--muted)">- Pack layers for November weather.</p>
-                    <p style="margin:0;color:var(--muted)">- Consider portable Wi‑Fi or local SIM.</p>
+                    <p style="margin:0;color:var(--muted)">- Passport</p>
+                    <p style="margin:0;color:var(--muted)">- Add Suica Card to apple wallet under transit card</p>
+                    <p style="margin:0;color:var(--muted)">- Airalo iOS app to buy an e-sim</p>
                 </div>
             </div>
 
